@@ -25,6 +25,7 @@ class TapGameViewController: UIViewController
     @IBOutlet weak var imageCountLabel: UILabel!
     
     
+    @IBOutlet weak var playgroundView: UIView!
 
     
     override func viewDidLoad() {
@@ -41,6 +42,9 @@ class TapGameViewController: UIViewController
                                                y: newImageCenter.y - imagePositionOffset.y,
                                                width: imageSize.width,
                                                height: imageSize.height))
+        
+       
+        
         if imageType == .Face
             {
                 newImage.imageType = .Face
@@ -56,9 +60,40 @@ class TapGameViewController: UIViewController
             {
                 print("image type not implemented")
             }
-        view.addSubview(newImage)
+        
+        
+        if (IsNewImageInsidePlayground(newImage, playgroundView)){
+            
+                playgroundView.addSubview(newImage)
+                imageCount+=1
+                addGestureOnImage(image: newImage)}
+        
+        
     }
     
+    func addGestureOnImage(image: UIView)
+        {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeImageOnTap))
+            
+            image.addGestureRecognizer(tapGesture)
+        }
+
+    func IsNewImageInsidePlayground(_ newImage: UIView, _ playgroundView: UIView) -> Bool
+    {
+        if (newImage.frame.origin.x >= 0 && newImage.frame.origin.x + newImage.frame.width < playgroundView.bounds.maxX && newImage.frame.origin.y >= 0 && newImage.frame.origin.y + newImage.frame.height < playgroundView.bounds.maxY)
+        {
+         return true
+        }
+        else {return false}
+    }
+    
+    func removeImageOnTap(_ recognizer: UITapGestureRecognizer)
+        {
+            recognizer.view?.removeFromSuperview()
+            imageCount-=1
+        }
+
+
     func PrepareFaceForDrawing (faceToDraw: ImageView)
     {
         faceToDraw.backgroundColor = UIColor.clear
@@ -84,9 +119,9 @@ class TapGameViewController: UIViewController
     func getRandomFace() -> Face
     {
         
-        let randomMouthCurvatureValue = getRandomArrayMember(targetArray:mouthCurvatureValues) as! Double
-        let randomEyeOpenedValue = getRandomArrayMember(targetArray: eyeOpenedValues) as! Int
-        let randomEyeBrowTiltValue = getRandomArrayMember(targetArray: eyeBrowTiltValues) as! Double
+        let randomMouthCurvatureValue = getRandomArrayMember(targetArray:mouthCurvatureValues) 
+        let randomEyeOpenedValue = getRandomArrayMember(targetArray: eyeOpenedValues) 
+        let randomEyeBrowTiltValue = getRandomArrayMember(targetArray: eyeBrowTiltValues) 
         
         
         return Face(mouth: Mouth(rawValue: randomMouthCurvatureValue)!,
@@ -95,9 +130,9 @@ class TapGameViewController: UIViewController
         )
     }
     
-    func getRandomArrayMember(targetArray: Array<Any>) -> AnyObject
+    func getRandomArrayMember<T>(targetArray: Array<T>) -> T
     {
-        return targetArray[Int(arc4random_uniform(UInt32(targetArray.count)))] as AnyObject
+        return targetArray[Int(arc4random_uniform(UInt32(targetArray.count)))]
     }
     
     
@@ -105,28 +140,9 @@ class TapGameViewController: UIViewController
     {
         if recognizer.state == .ended
         {
-            let tapCenterPoint = recognizer.location(in: view)
-            var subViewRemoved = false
-            let allImagesInView = view.subviews
+            let tapCenterPoint = recognizer.location(in: playgroundView)
             
-            
-            for singleImage in allImagesInView
-            {
-                if didUserTapOnExistingImage(singleImage, tapCenterPoint)
-                {
-                    singleImage.removeFromSuperview()
-                    subViewRemoved = true
-                    imageCount-=1
-                    break
-                }
-            }
-            
-            if (subViewRemoved == false)
-            {
-                drawNewImageInView(view: view,
-                                  newImageCenter: tapCenterPoint)
-                imageCount+=1
-            }
+            drawNewImageInView(view: playgroundView, newImageCenter: tapCenterPoint)
         }
     
     }

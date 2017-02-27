@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E66C588E1E6329FB0041B3A2 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66C588D1E6329FB0041B3A2 /* HelpViewController.swift */; };
+		E66C58901E645AF30041B3A2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E66C588F1E645AF30041B3A2 /* Media.xcassets */; };
 		E6B5FA6A1E50CEA000437698 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B5FA691E50CEA000437698 /* LoginViewController.swift */; };
 		E6B5FA6C1E50D30900437698 /* ChooseGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B5FA6B1E50D30900437698 /* ChooseGameViewController.swift */; };
 		E6B5FA6E1E50D5A800437698 /* TapGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B5FA6D1E50D5A800437698 /* TapGameViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E66C588D1E6329FB0041B3A2 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		E66C588F1E645AF30041B3A2 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E6B5FA691E50CEA000437698 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E6B5FA6B1E50D30900437698 /* ChooseGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGameViewController.swift; sourceTree = "<group>"; };
 		E6B5FA6D1E50D5A800437698 /* TapGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapGameViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +53,7 @@
 				E6B5FA691E50CEA000437698 /* LoginViewController.swift */,
 				E6B5FA6B1E50D30900437698 /* ChooseGameViewController.swift */,
 				E6B5FA6D1E50D5A800437698 /* TapGameViewController.swift */,
+				E66C588D1E6329FB0041B3A2 /* HelpViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 				ECE355BF1CB5DDDA00AC42EA /* AppDelegate.swift */,
 				ECE355C81CB5DDDA00AC42EA /* LaunchScreen.storyboard */,
 				ECE355CB1CB5DDDA00AC42EA /* Info.plist */,
+				E66C588F1E645AF30041B3A2 /* Media.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -170,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6F6B7781E5C564C00247BE2 /* Main.storyboard in Resources */,
+				E66C58901E645AF30041B3A2 /* Media.xcassets in Resources */,
 				ECE355CA1CB5DDDA00AC42EA /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E66C588E1E6329FB0041B3A2 /* HelpViewController.swift in Sources */,
 				E6B5FA6C1E50D30900437698 /* ChooseGameViewController.swift in Sources */,
 				E6B5FA6A1E50CEA000437698 /* LoginViewController.swift in Sources */,
 				E6B5FA771E547A2100437698 /* Image.swift in Sources */,

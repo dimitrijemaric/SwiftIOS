@@ -8,42 +8,74 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
     var firstName = "<firstname>"
     var lastName = "<lastName>"
     
-    @IBAction func lastNameEdited(_ field: UITextField) {
+   
+    @IBOutlet weak var firstNameField: UITextField!
+    
+    
+    @IBOutlet weak var lastNameField: UITextField!
+    
+    
+    @IBOutlet weak var rightArrowImage: UIImageView!
+   
+    
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
         
-        lastName = field.text!
+        firstNameField.delegate = self
+        lastNameField.delegate = self
         
+        
+        
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedToRight))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.isEnabled = true
+        rightArrowImage.addGestureRecognizer(swipeRight)
+        rightArrowImage.isUserInteractionEnabled = true
+        
+    }
+
+    func swipedToRight(gesture:UISwipeGestureRecognizer){
+     performSegue(withIdentifier: Segues.help, sender: gesture.view)
     }
     
-    @IBAction func firstNameEdited(_ field: UITextField) {
-        
-        firstName = field.text!
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
-   
+    
     @IBAction func login(_ sender: Any) {
         //todo
         
     }
     
+    private struct Segues
+    {
+        static let chooseGame = "fromLoginToGames"
+        static let help = "fromLoginToHelp"
+    }
    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
-        
-        if segue.identifier == "fromLoginToGames"
+        if segue.identifier == Segues.chooseGame
         {
-            let navigationVC = segue.destination as! UINavigationController
-            let gamesVC = navigationVC.topViewController as! ChooseGameViewController
-            gamesVC.nameLabelText = firstName + " " + lastName
+            let firstName =  (firstNameField.text?.isEmpty)! ? "<firstName>" : firstNameField.text
+            let lastName = (lastNameField.text?.isEmpty)! ? "<lastName>" : lastNameField.text
+            
+            if let navigationVC = segue.destination as? UINavigationController
+            {
+                if let chooseGameVC = navigationVC.topViewController as? ChooseGameViewController
+                    {
+                        chooseGameVC.nameLabelText = firstName!  + " " + lastName!                    }
+            }
+            
         }
     }
   

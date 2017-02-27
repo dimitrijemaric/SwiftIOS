@@ -19,26 +19,36 @@ class ChooseGameViewController: UIViewController {
         nameLabel.text = "Hi " + nameLabelText + ", choose a game to play"
     }
     
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    private struct Segues
         
-        let tapGameDestinationVC = segue.destination as! TapGameViewController
+        {
+            static let faceGame = "fromGamesToFaceGame"
+            static let boxGame = "fromGamesToBoxGame"
+        }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+        if let tapGameDestinationVC = segue.destination as? TapGameViewController
+        {
             tapGameDestinationVC.nameLabelText = nameLabelText
-        
-        if segue.identifier == "fromGamesToFaceGame"
+            
+            if segue.identifier == Segues.faceGame
             {
                 tapGameDestinationVC.imageType = .Face
                 tapGameDestinationVC.imageSize = (80, 80)
                 tapGameDestinationVC.imagePositionOffset = (40, 40)
             }
-            
-        else if segue.identifier == "fromGamesToBoxGame"
+                
+            else if segue.identifier == Segues.boxGame
             {
                 tapGameDestinationVC.imageType = .Box
                 tapGameDestinationVC.imageSize = (width: 40, height: 40)
                 tapGameDestinationVC.imagePositionOffset = (x: 20, y: 20)
             }
-    
+            
+        }
     }
 }
